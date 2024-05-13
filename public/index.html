@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= device-width, initial-scale=1.0">
+    ><title> MI PRIMER APLICACION DE WEB SOCKETS</title>
+    <!-- mandamos a llamar a la libreria para que el front end use socket.io-->
+    <!--es una libreria que se tanto como en el server como el cliente-->
+    <script src="/socket.io/socket.io.js"></script>
+    <!--mandamos llamar nuestra propia libreria main.js-->
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <h1>Mi aplicación</h1>
+<div id="messages"></div>
+<br>
+<div>
+    <!--crear formulario para mandar los mensajes-->
+    <form onsubmit="return addMessage(this)">
+        <input type="text" id="username" placeholder=" Tu Nombre: John Doe">
+        <br>
+        <input type="text" id="texto" placeholder="Cuentanos algo">
+        <br>
+        <input type="submit" value="Enviar">
+
+    </form>
+</div>
+</body>
+</html>
