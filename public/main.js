@@ -16,10 +16,12 @@ function render(data){
     //aqui se inicia el manejo del string que viene en EM6 se usan estas comillas ''
     //laS variables se colocan con el siglo de $ y entre {}
 
-var html= `<div> 
-                <strong>${data.autor}</strong>:
-                <em>${data.texto}</em>
-            </div>`;
+var html = data.map(function(elem, index){
+    return(`<div> 
+    <strong>${elem.autor}</strong>:
+    <em>${elem.texto}</em>
+</div>`);
+}).join("");
                 
 document.getElementById('messages').innerHTML=html;
 
@@ -33,5 +35,5 @@ function addMessage(e){
         texto: document.getElementById(texto).value
     };
     socket.emit('new-message' , payload);
-    return false;
+    return false; 
 }

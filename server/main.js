@@ -3,6 +3,12 @@ var app = express();
 var server = require ('http').Server(app);
 var io= require ('socket.io')(server);
 
+// array que guarda los mensajes
+var message = [{
+    id: 1,
+    texto: "Hola soy un mensaje",
+    autor: "Erick Eduardo Cerros Cabello"
+}];
 /* Aqui usamos un middleware para usar elementos estaticos en la sección publica de la aplicada */
 app.use(express.static('public'));
 
@@ -16,12 +22,19 @@ por consola para saber que está pasando y tenemos que hacer que el mensaje veng
 
 io.on('connection', function(socket){
     console.log('Alguien se ha conectado al socket')
+
     /*aqui controlamos los eventos del cliente mediante sockets */
-    socket.emit('messages',{
-        id: 1,
-        texto: "HolaT",
-        autor: "Erick Eduardo Cerros Cabello"
+    socket.emit('messages',message);
+    
+    socket.on(`new-message`, function(data){
+         //para poder guardar estos mensajes lo ideal seria en una base de datos
+         // para este ejercicio utlizaremos arrays (esto es bueno para produccion)
+
+         message.push(data);
+
+         io.socket.emit(`messages`, message);
     });
+
 });
 
 server.listen(3003, function(){
