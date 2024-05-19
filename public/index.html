@@ -7,9 +7,10 @@
     <title> MI PRIMER APLICACION DE WEB SOCKETS</title>
     <!-- mandamos a llamar a la libreria para que el front end use socket.io-->
     <!--es una libreria que se tanto como en el server como el cliente-->
-    <script src="../node_modules/socket.io/socket.io.js"></script>
+    <!-- <script src="../socket.io/socket.io.js"></script> -->
+    <script src="../node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
     <!--mandamos llamar nuestra propia libreria main.js-->
-    <!-- <script src="main.js"></script> -->
+    <script src="main.js"></script>
 </head>
 
 <body>
@@ -25,44 +26,5 @@
         <input type="submit" value="Enviar" />
 
     </form>
-
-    <script type="text/javascript">
-        var socket = io.connect('http://localhost:3003', {'forceNew':true});
-
-
-socket.on('messages', function(data){
-    console.log(data);
-    render(data);
-});
-
-// creamos un templete para que nos imprima el contenido
-
-function render(data){
-    //restructuramos esta seccion para que se maneje el array
-    //elem se un conjunto de cosas
-    //con map recorremos el array
-    
-    var html = data.map(function(elem,index){
-       return ( `<div>
-        <strong>${elem.autor}</strong>:
-        <em>${elem.texto}</em> 
-        </div>`);
-    }).join(" ");
-
-    document.getElementById('messages').innerHTML = html;
-}
-
-//cada ves que alguien precione el boton enviar en el formulario
-//el cliente emite un nuevo mensaje y manda el payload
-function addMessage(e){
-    var payload = {
-        autor: document.getElementById('username').value,
-        texto: document.getElementById('texto').value
-
-    };
-    socket.emit('new-message',payload);
-    return fals
-}
-    </script>
 </body>
 </html>
