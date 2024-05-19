@@ -1,7 +1,8 @@
 {
   "dependencies": {
-    "express": "^4.19.2",
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
     "node.js": "^0.0.1-security",
-    "socket.io": "^4.7.5"
+    "socket.io": "^2.3.0"
   }
 }

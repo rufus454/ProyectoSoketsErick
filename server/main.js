@@ -12,9 +12,7 @@ var message = [{
 /* Aqui usamos un middleware para usar elementos estaticos en la sección publica de la aplicada */
 app.use(express.static('public'));
 
-app.get('/', function(req, res){
-res.status(200).send("Hola Mundo");
-});
+
 
 
 /* De esta activamos el socket para que este escuche cuando mandamos un mensaje de control
@@ -26,13 +24,12 @@ io.on('connection', function(socket){
     /*aqui controlamos los eventos del cliente mediante sockets */
     socket.emit('messages',message);
     
-    socket.on(`new-message`, function(data){
+    socket.on('new-message', function(data){
          //para poder guardar estos mensajes lo ideal seria en una base de datos
          // para este ejercicio utlizaremos arrays (esto es bueno para produccion)
-
          message.push(data);
 
-         io.socket.emit(`messages`, message);
+         io.sockets.emit(`messages`, message);
     });
 
 });
