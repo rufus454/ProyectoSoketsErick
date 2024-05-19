@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var cors = require("cors");
 var server = require ('http').Server(app);
 var io= require ('socket.io')(server);
 
@@ -12,7 +13,7 @@ var message = [{
 /* Aqui usamos un middleware para usar elementos estaticos en la sección publica de la aplicada */
 app.use(express.static('public'));
 
-
+app.use(cors());
 
 
 /* De esta activamos el socket para que este escuche cuando mandamos un mensaje de control
